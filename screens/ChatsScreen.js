@@ -18,6 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Chat from "../components/Chat";
+import { SERVER_HOST } from "../src/api/RestUtils";
 
 const ChatsScreen = () => {
   const [options, setOptions] = useState(["Chats"]);
@@ -41,7 +42,7 @@ const ChatsScreen = () => {
       setToken("");
       navigation.replace("Login");
     } catch (error) {
-      console.log("Error", error);
+      // console.log("Error", error);
     }
   };
 
@@ -68,19 +69,17 @@ const ChatsScreen = () => {
   }, [userId]);
   const getrequests = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:4000/getrequests/${userId}`
-      );
+      const response = await axios.get(`${SERVER_HOST}/getrequests/${userId}`);
 
       setRequests(response.data);
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
     }
   };
-  console.log(requests);
+  // console.log(requests);
   const acceptRequest = async (requestId) => {
     try {
-      const response = await axios.post("http://localhost:4000/acceptrequest", {
+      const response = await axios.post(`${SERVER_HOST}/acceptrequest`, {
         userId: userId,
         requestId: requestId,
       });
@@ -89,20 +88,20 @@ const ChatsScreen = () => {
         await getrequests();
       }
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
     }
   };
   const getUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/user/${userId}`);
+      const response = await axios.get(`${SERVER_HOST}/user/${userId}`);
       setChats(response.data);
     } catch (error) {
-      console.log("Error fetching user", error);
+      // console.log("Error fetching user", error);
       throw error;
     }
   };
 
-  console.log("users", chats);
+  // console.log("users", chats);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View

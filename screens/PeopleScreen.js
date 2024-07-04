@@ -9,18 +9,18 @@ const PeopleScreen = () => {
   const { token, userId } = useContext(AuthContext);
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/users/${userId}`);
+      const response = await fetch(`${SERVER_HOST}/${userId}`);
       const data = await response.json();
       setUsers(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   useEffect(() => {
     fetchUsers();
   }, []);
-  console.log("users", users);
+  // console.log("users", users);
   const navigation = useNavigation();
   return (
     <SafeAreaView>

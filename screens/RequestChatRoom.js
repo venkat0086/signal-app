@@ -34,8 +34,8 @@ const RequestChatRoom = () => {
       ),
     });
   }, []);
-  console.log("userId", userId);
-  console.log("Rec", route?.params.receiverId);
+  // console.log("userId", userId);
+  // console.log("Rec", route?.params.receiverId);
   const sendMessage = async () => {
     try {
       const userData = {
@@ -44,10 +44,7 @@ const RequestChatRoom = () => {
         message: message,
       };
 
-      const response = await axios.post(
-        "http://localhost:4000/sendrequest",
-        userData
-      );
+      const response = await axios.post(`${SERVER_HOST}/sendrequest`, userData);
       if (response.status == 200) {
         setMessage("");
         Alert.alert(
@@ -56,7 +53,7 @@ const RequestChatRoom = () => {
         );
       }
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
     }
   };
   return (

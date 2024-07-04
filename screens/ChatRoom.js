@@ -15,6 +15,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Feather from "react-native-vector-icons/Feather";
 import axios from "axios";
 import { useSocketContext } from "../SocketContext";
+import { SERVER_HOST } from "../src/api/RestUtils";
 
 const ChatRoom = () => {
   const navigation = useNavigation();
@@ -52,7 +53,7 @@ const ChatRoom = () => {
   listeMessages();
   const sendMessage = async (senderId, receiverId) => {
     try {
-      await axios.post("http://localhost:4000/sendMessage", {
+      await axios.post(`${SERVER_HOST}/sendMessage`, {
         senderId,
         receiverId,
         message,
@@ -66,7 +67,7 @@ const ChatRoom = () => {
         fetchMessages();
       }, 100);
     } catch (error) {
-      console.log("Error", error);
+      // console.log("Error", error);
     }
   };
   const fetchMessages = async () => {
@@ -74,19 +75,19 @@ const ChatRoom = () => {
       const senderId = userId;
       const receiverId = route?.params?.receiverId;
 
-      const response = await axios.get("http://localhost:4000/messages", {
+      const response = await axios.get(`${SERVER_HOST}/messages`, {
         params: { senderId, receiverId },
       });
 
       setMessages(response.data);
     } catch (error) {
-      console.log("Error", error);
+      // console.log("Error", error);
     }
   };
   useEffect(() => {
     fetchMessages();
   }, []);
-  console.log("messages", messages);
+  // console.log("messages", messages);
   const formatTime = (time) => {
     const options = { hour: "numeric", minute: "numeric" };
     return new Date(time).toLocaleString("en-US", options);

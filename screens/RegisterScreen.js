@@ -27,9 +27,9 @@ const RegisterScreen = ({ navigation }) => {
     };
 
     axios
-      .post("http://10.0.2.2:4000/register", user)
+      .post(`${SERVER_HOST}/register`, user)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         Alert.alert(
           "Registration succesfull",
           "You have been registered succesfully!"

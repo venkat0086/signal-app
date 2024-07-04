@@ -3,30 +3,31 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../AuthContext";
 import axios from "axios";
+import { SERVER_HOST } from "../src/api/RestUtils";
 
 const Chat = ({ item }) => {
   const navigation = useNavigation();
   const { userId } = useContext(AuthContext);
-  console.log("SDfsdf", userId);
+  // console.log("SDfsdf", userId);
   const [messages, setMessages] = useState([]);
   const fetchMessages = async () => {
     try {
       const senderId = userId;
       const receiverId = item?._id;
 
-      console.log(senderId);
-      console.log(receiverId);
+      // console.log(senderId);
+      // console.log(receiverId);
 
-      const response = await axios.get("http://localhost:8000/messages", {
+      const response = await axios.get(`${SERVER_HOST}/messages`, {
         params: { senderId, receiverId },
       });
 
       setMessages(response.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
-  console.log("messages", messages);
+  // console.log("messages", messages);
   useEffect(() => {
     fetchMessages();
   }, []);

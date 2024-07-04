@@ -20,11 +20,11 @@ const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
   const { token, setToken } = useContext(AuthContext);
-  console.log("token value", token);
+  // console.log("token value", token);
   useEffect(() => {
     const fetchUser = async () => {
       const token = await AsyncStorage.getItem("authToken");
-      console.log("token from context", token);
+      // console.log("token from context", token);
     };
 
     fetchUser();

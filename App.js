@@ -58,7 +58,6 @@ function Section({ children, title }) {
 }
 
 function App() {
-  //mongodb+srv://sujan:sujan@cluster0.qfltag9.mongodb.net/
   const isDarkMode = useColorScheme() === "dark";
 
   const backgroundStyle = {

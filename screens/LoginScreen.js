@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../AuthContext";
 import axios from "axios";
+import { SERVER_HOST } from "../src/api/RestUtils";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -32,10 +33,10 @@ const LoginScreen = () => {
       password: password,
     };
     axios
-      .post("http://10.0.2.2:4000/login", user)
+      .post(`${SERVER_HOST}/login`, user)
       .then((response) => {
         const token = response.data.token;
-        console.log("token", token);
+        // console.log("token", token);
         AsyncStorage.setItem("authToken", token);
         setToken(token);
       })

@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(
     AsyncStorage.getItem("authToken") || null
   );
-  console.log("BABE AU", authUser);
+  // console.log("BABE AU", authUser);
   useEffect(() => {
     const fetchUser = async () => {
       const token = await AsyncStorage.getItem("authToken");
